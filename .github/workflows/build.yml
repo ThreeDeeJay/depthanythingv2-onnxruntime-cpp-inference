@@ -55,9 +55,12 @@ jobs:
         key: vcpkg-${{hashFiles('**/CMakeLists.txt')}}
 
     - name: vcpkg
-      if: steps.cache_vcpkg != 'true'
+      if: steps.cache_vcpkg.outputs.cache-hit != 'true'
       run: |
         C:\vcpkg\vcpkg install OpenCV onnxruntime --triplet ${{matrix.Settings.Triplet}}
+
+    - name: List files
+      run: ls "C:/vcpkg/packages" -R
 
 #        C:\vcpkg\vcpkg install OpenCV --triplet ${{matrix.Settings.Triplet}}
 #        git clone https://github.com/microsoft/vcpkg.git --depth 1
