@@ -57,7 +57,7 @@ jobs:
     - name: vcpkg
       if: steps.cache_vcpkg != 'true'
       run: |
-        C:\vcpkg\vcpkg install tinycthread --triplet ${{matrix.Settings.Triplet}}
+        C:\vcpkg\vcpkg install OpenCV onnxruntime --triplet ${{matrix.Settings.Triplet}}
 
 #        C:\vcpkg\vcpkg install OpenCV --triplet ${{matrix.Settings.Triplet}}
 #        git clone https://github.com/microsoft/vcpkg.git --depth 1
