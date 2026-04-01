@@ -73,10 +73,8 @@ jobs:
         -B "${{github.workspace}}/build"
         -DCMAKE_BUILD_TYPE=${{matrix.Configuration}}
         -DCMAKE_PREFIX_PATH=C:\vcpkg\installed\${{matrix.Settings.Triplet}}
-
-#        -DCMAKE_PREFIX_PATH=C:/vcpkg/installed
-#        -DONNX_RUNTIME_SESSION_INCLUDE_DIRS=
-#        -DONNX_RUNTIME_LIB=
+        -DONNX_RUNTIME_SESSION_INCLUDE_DIRS=C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include\onnxruntime
+        -DONNX_RUNTIME_LIB=C:\vcpkg\installed\${{matrix.Settings.Triplet}}\lib\onnxruntime.lib
 
     - name: Build
       run: >
