@@ -47,14 +47,15 @@ jobs:
         --recurse-submodules
         --depth 1
 
+    - name: Cache vcpkg
       uses: actions/cache@v5
-      id: vcpkg_cache
+      id: cache_vcpkg
       with:
         path: vcpkg
         key: vcpkg-${{hashFiles('**/CMakeLists.txt')}}
 
     - name: vcpkg
-      if: steps.vcpkg_cache != 'true'
+      if: steps.cache_vcpkg != 'true'
       run: |
         git clone https://github.com/microsoft/vcpkg.git --depth 1
         ./vcpkg/bootstrap-vcpkg.bat
