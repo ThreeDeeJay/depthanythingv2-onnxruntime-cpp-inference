@@ -60,7 +60,7 @@ jobs:
         C:\vcpkg\vcpkg install OpenCV onnxruntime --triplet ${{matrix.Settings.Triplet}}
 
     - name: List files
-      run: ls "C:/vcpkg/packages" -R
+      run: ls "C:\vcpkg\packages" -R
 
 #        C:\vcpkg\vcpkg install OpenCV --triplet ${{matrix.Settings.Triplet}}
 #        git clone https://github.com/microsoft/vcpkg.git --depth 1
@@ -72,9 +72,10 @@ jobs:
         -A "${{matrix.Settings.Platform}}"
         -B "${{github.workspace}}/build"
         -DCMAKE_BUILD_TYPE=${{matrix.Configuration}}
-        -DCMAKE_PREFIX_PATH=vcpkg\installed\${{matrix.Settings.Triplet}}
-        -DONNX_RUNTIME_SESSION_INCLUDE_DIRS=
-        -DONNX_RUNTIME_LIB=
+        -DCMAKE_PREFIX_PATH=C:\vcpkg\packages
+
+#        -DONNX_RUNTIME_SESSION_INCLUDE_DIRS=
+#        -DONNX_RUNTIME_LIB=
 
     - name: Build
       run: >
