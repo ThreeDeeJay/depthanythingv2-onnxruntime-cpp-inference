@@ -51,13 +51,17 @@ jobs:
       uses: actions/cache@v5
       id: cache_vcpkg
       with:
-        path: C:/vcpkg/packages
+        path: C:/vcpkg/installed
         key: vcpkg-${{hashFiles('**/CMakeLists.txt')}}
 
     - name: vcpkg
       if: steps.cache_vcpkg.outputs.cache-hit != 'true'
       run: |
         C:\vcpkg\vcpkg install OpenCV onnxruntime --triplet ${{matrix.Settings.Triplet}}
+
+    - name: vcpkg
+      run: |
+        C:\vcpkg\vcpkg install tiff --triplet ${{matrix.Settings.Triplet}}
 
     - name: List files
       run: ls "C:\vcpkg\packages" -R
@@ -72,7 +76,8 @@ jobs:
         -A "${{matrix.Settings.Platform}}"
         -B "${{github.workspace}}/build"
         -DCMAKE_BUILD_TYPE=${{matrix.Configuration}}
-        -DCMAKE_PREFIX_PATH=C:\vcpkg\packages
+
+#        -DCMAKE_PREFIX_PATH=C:\vcpkg\installed\${{matrix.Settings.Triplet}}
 
 #        -DONNX_RUNTIME_SESSION_INCLUDE_DIRS=
 #        -DONNX_RUNTIME_LIB=
