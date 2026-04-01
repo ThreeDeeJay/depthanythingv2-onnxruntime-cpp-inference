@@ -51,12 +51,14 @@ jobs:
       uses: actions/cache@v5
       id: cache_vcpkg
       with:
-        path: vcpkg
+        path: C:/vcpkg/packages
         key: vcpkg-${{hashFiles('**/CMakeLists.txt')}}
 
     - name: vcpkg
       if: steps.cache_vcpkg != 'true'
       run: |
-        git clone https://github.com/microsoft/vcpkg.git --depth 1
-        ./vcpkg/bootstrap-vcpkg.bat
-        vcpkg install OpenCV --triplet ${{matrix.Settings.Triplet}}
+        C:\vcpkg\vcpkg install tinycthread --triplet ${{matrix.Settings.Triplet}}
+
+#        C:\vcpkg\vcpkg install OpenCV --triplet ${{matrix.Settings.Triplet}}
+#        git clone https://github.com/microsoft/vcpkg.git --depth 1
+#        ./vcpkg/bootstrap-vcpkg.bat
