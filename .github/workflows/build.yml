@@ -59,12 +59,8 @@ jobs:
       run: |
         vcpkg install OpenCV onnxruntime tiff --triplet ${{matrix.Settings.Triplet}}
 
-    - name: List files
-      run: ls "C:\vcpkg" -R
-
-#        C:\vcpkg\vcpkg install OpenCV --triplet ${{matrix.Settings.Triplet}}
-#        git clone https://github.com/microsoft/vcpkg.git --depth 1
-#        ./vcpkg/bootstrap-vcpkg.bat
+    - name: List vcpkg files
+      run: Get-ChildItem -Path "C:\vcpkg" -File -Recurse | Select-Object FullName
 
     - name: Configure
       run: >
